@@ -32,6 +32,9 @@ export async function fetchRevenue() {
 
 export async function fetchLatestInvoices() {
   try {
+
+    console.log('Fetching invoices data...');
+    await new Promise((resolve) => setTimeout(resolve, 5000));
     const data = await sql<LatestInvoiceRaw[]>`
       SELECT invoices.amount, customers.name, customers.image_url, customers.email, invoices.id
       FROM invoices
@@ -48,6 +51,8 @@ export async function fetchLatestInvoices() {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch the latest invoices.');
   }
+
+  console.log('Data fetch completed after 5 seconds.');
 }
 
 export async function fetchCardData() {
